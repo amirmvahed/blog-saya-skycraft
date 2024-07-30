@@ -1,13 +1,14 @@
 'use client';
-import { blog_data } from "@/assets/assets";
+import {blog_data} from "@/assets/assets";
 import BlogItem from "@/components/BlogItem";
-import { BlogItemType, Category } from "@/types";
-import { useState } from "react";
+import {BlogItemType, Category} from "@/types";
+import {useState} from "react";
+
+
+const categories: Category[] = ["All", "Technology", "Startup", "Lifestyle"];
 
 export default function BlogList() {
     const [menu, setMenu] = useState<Category>("All");
-
-    const categories: Category[] = ["All", "Technology", "Startup", "Lifestyle"];
 
     return (
         <>
