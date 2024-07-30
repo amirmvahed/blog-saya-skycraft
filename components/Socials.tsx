@@ -5,10 +5,14 @@ import {assets} from '@/assets/assets'
 
 const socials: string[] = [assets.facebook_icon, assets.twitter_icon, assets.googleplus_icon]
 
-export default function Socials() {
+interface SocialsProps {
+    width?: number
+}
+
+export default function Socials({width = 40}: SocialsProps) {
     return (
         <div className={'flex'}>
-            {socials.map((socialLogo:string) => <Image width={40} src={socialLogo}/>)}
+            {socials.map((socialLogo: string, index) => <Image key={index} width={width} src={socialLogo}/>)}
         </div>
     );
 }
