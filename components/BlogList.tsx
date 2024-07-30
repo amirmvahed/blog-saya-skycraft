@@ -27,6 +27,7 @@ export default function BlogList() {
                 {blog_data.filter(item => menu === 'All' || item.category === menu).map((item: BlogItemType) => (
                     <BlogItem
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         category={item.category}
                         description={item.description}
