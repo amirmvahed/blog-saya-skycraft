@@ -1,3 +1,4 @@
+import Menu from "@/components/Menu";
 import Image from "next/image";
 import {assets} from '@/assets/assets'
 import React from 'react'
@@ -6,13 +7,7 @@ import React from 'react'
 const Header = () => {
     return (
         <header className={'py-5 px-5 md:px-12 lg:px-28'}>
-            <div className={'flex justify-between items-center'}>
-                <Image src={assets.logo} width={180} alt={'logo'} className={'w-[130px] sm:w-auto'}/>
-                <button
-                    className={'flex items-center gap-2 font-medium text-xs py-1 px-1 sm:text-sm sm:py-3 sm:px-6 border border-solid border-black shadow-[-7px_7px_0px_#000]'}>
-                    Get started <Image src={assets.arrow} alt={'Get started'}/>
-                </button>
-            </div>
+            <Menu/>
             <div className={'text-center my-8'}>
                 <h1 className={'text-3xl sm:text-5xl font-medium'}>Latest Blogs</h1>
                 <p className={'my-10 max-w-[740px] m-auto text-xs sm:text-base'}>Lorem ipsum dolor sit amet, consectetur
