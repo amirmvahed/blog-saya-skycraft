@@ -1,4 +1,4 @@
-import {blogItem} from "@/types";
+import {BlogItemType} from "@/types";
 import blog_pic_1 from './blog_pic_1.png';
 import blog_pic_2 from './blog_pic_2.png';
 import blog_pic_3 from './blog_pic_3.png';
@@ -42,7 +42,7 @@ export const assets = {
 }
 
 
-export const blog_data: blogItem[] = [{
+export const blog_data: BlogItemType[] = [{
     id: 1,
     title: "A detailed step by step guide to manage your lifestyle",
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
