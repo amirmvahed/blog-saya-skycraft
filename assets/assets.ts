@@ -42,8 +42,7 @@ export const assets = {
 }
 
 
-
-export const blog_data:blogItem[] = [{
+export const blog_data: blogItem[] = [{
     id: 1,
     title: "A detailed step by step guide to manage your lifestyle",
     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the..",
