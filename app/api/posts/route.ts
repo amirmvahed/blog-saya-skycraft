@@ -7,9 +7,9 @@ export async function GET() {
     try {
         await connect()
         const blogs = await Blog.find()
-        return new NextResponse(JSON.stringify(blogs), {status: 200});
+        return NextResponse.json(blogs, { status: 200 })
     } catch (e) {
-        return new NextResponse('An Error occurred in GET blogs!' + e, {status: 500});
+        return NextResponse.json({ message: 'An Error occurred in GET blogs!', error: e.toString() }, { status: 500 })
     }
 }
 
