@@ -1,7 +1,7 @@
 import connect from "@/lib/config/db";
 import Blog from "@/lib/models/Blog";
-import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
+import {NextResponse} from "next/server";
+import {writeFile} from "fs/promises";
 
 export async function GET() {
     try {
@@ -11,7 +11,6 @@ export async function GET() {
     } catch (e) {
         return new NextResponse('An Error occurred in GET blogs!' + e, {status: 500});
     }
-
 }
 
 export async function POST(request) {
