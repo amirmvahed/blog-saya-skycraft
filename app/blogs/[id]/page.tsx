@@ -4,7 +4,7 @@ import Image from "next/image";
 import {notFound} from "next/navigation";
 
 async function getBlogData(id) {
-    const res = await fetch('http://localhost:3000/api/blogs/' + id)
+    const res = await fetch('/api/posts/' + id)
     if (!res.ok) {
         return notFound()
     }
