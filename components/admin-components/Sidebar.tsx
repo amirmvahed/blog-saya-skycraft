@@ -19,11 +19,6 @@ export default function Sidebar() {
                         className={'mt-5 flex items-center border border-black gap-3 font-medium px-3 py-2 bg-white shadow-[-5px_5px_0px_#000]'}>
                         <Image src={assets.blog_icon} alt={'Blog Icon'} width={28}/><p>Blogs list</p>
                     </Link>
-                    <Link
-                        href={'/admin/subscriptions'}
-                        className={'mt-5 flex items-center border border-black gap-3 font-medium px-3 py-2 bg-white shadow-[-5px_5px_0px_#000]'}>
-                        <Image src={assets.email_icon} alt={'Email Icon'} width={28}/><p>Subscriptions</p>
-                    </Link>
                 </div>
             </div>
         </div>

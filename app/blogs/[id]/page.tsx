@@ -4,7 +4,7 @@ import Image from "next/image";
 import {notFound} from "next/navigation";
 
 async function getBlogData(id) {
-    const res = await fetch('/api/posts/' + id)
+    const res = await fetch('http://localhost:3000/api/posts/' + id)
     if (!res.ok) {
         return notFound()
     }
@@ -28,37 +28,10 @@ async function Blog({params}) {
                 </div>
                 <div className={'mx-5 max-w-[800px] md:mx-auto mt-[-100px] mb-10'}>
                     <Image className={'border-4 border-white'} src={data.image} width={1280} height={720} alt={data.title}/>
-                    <h1 className={'my-8 text-[26px] font-semibold'}>
-                        Introduction:
-                    </h1>
-                    <p>{data.description}</p>
-                    <h3 className={'my-5 text-[18px] font-semibold'}>
-                        Step 1: Self-Reflection
-                    </h3>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ea eveniet illo
-                        laudantium nemo omnis praesentium, provident repellendus ullam voluptatem!</p>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ea eveniet illo
-                        laudantium nemo omnis praesentium, provident repellendus ullam voluptatem!</p>
-                    <h3 className={'my-5 text-[18px] font-semibold'}>
-                        Step 2: Self-Reflection
-                    </h3>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ea eveniet illo
-                        laudantium nemo omnis praesentium, provident repellendus ullam voluptatem!</p>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ea eveniet illo
-                        laudantium nemo omnis praesentium, provident repellendus ullam voluptatem!</p>
-                    <h3 className={'my-5 text-[18px] font-semibold'}>
-                        Step 3: Self-Reflection
-                    </h3>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ea eveniet illo
-                        laudantium nemo omnis praesentium, provident repellendus ullam voluptatem!</p>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At ea eveniet illo
-                        laudantium nemo omnis praesentium, provident repellendus ullam voluptatem!</p>
-                    <h3 className={'my-5 text-[18px] font-semibold'}>
-                        Conclusion
-                    </h3>
-                    <p className={'my-3'}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A id laboriosam nesciunt
-                        nisi repellat. Eius hic id perspiciatis rem. A assumenda autem consequuntur deserunt error
-                        exercitationem expedita id, iusto mollitia nihil qui quis, temporibus totam!</p>
+                    <div
+                        className={'blog-content'}
+                        dangerouslySetInnerHTML={{__html: data.description}}
+                    />
                     <div className={'my-24'}>
                         <p className={'text-black font font-semibold my-4'}>
                             Share this article on social media
