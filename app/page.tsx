@@ -1,5 +1,4 @@
 import BlogList from "@/components/BlogList";
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 export default function Home() {
@@ -7,7 +6,6 @@ export default function Home() {
         <>
             <Header/>
             <BlogList/>
-            <Footer/>
         </>
     );
 }
