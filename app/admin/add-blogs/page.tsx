@@ -1,7 +1,6 @@
 'use client';
 import {assets} from "@/assets/assets";
 import {BlogItemType} from "@/types";
-import axios from "axios";
 import NextImage from 'next/image';
 import {useState} from "react";
 import {toast} from "react-toastify";
@@ -42,9 +41,16 @@ export default function AddBlogs() {
         formData.append('author', data.author?.toString())
         formData.append('authorImg', data.authorImg?.toString())
         formData.append('image', image)
-        axios.post('/api/posts', formData).then((response) => {
+        try {
+            const response = await fetch('/api/posts', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+
             if (response.status === 200) {
-                toast.success(response.data)
+                toast.success(data.message);
                 setData({
                     title: '',
                     description: '',
@@ -52,12 +58,14 @@ export default function AddBlogs() {
                     authorImg: 'authorImg',
                     category: 'Startup',
                     image: '',
-                })
+                });
                 setImage(null)
+            } else {
+                toast.error("ERROR: " + data.message)
             }
-        }).catch((e) => {
+        } catch (e) {
             toast.error("ERROR: " + e.message)
-        })
+        }
     }
 
     return (

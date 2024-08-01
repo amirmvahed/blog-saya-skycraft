@@ -36,8 +36,8 @@ export async function POST(request) {
         };
 
         await Blog.create(blogData);
-        return new NextResponse('Blog Added', {status: 200});
+        return NextResponse.json({ message: 'Blog Added' }, { status: 200 });
     } catch (e) {
-        return new NextResponse('An Error occurred in POST a blog!' + e, {status: 500});
+        return NextResponse.json({ message: 'An Error occurred in POST a blog!', error: e.toString() }, { status: 500 });
     }
 }
