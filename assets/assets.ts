@@ -50,7 +50,7 @@ export const blog_data: BlogItemType[] = [{
     date: Date.now(),
     category: "Lifestyle",
     author: "Alex Bennett",
-    author_img: profile_icon
+    authorImg: profile_icon
 },
     {
         id: 2,
@@ -60,7 +60,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Startup",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 3,
@@ -70,7 +70,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Technology",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 4,
@@ -80,7 +80,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Technology",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 5,
@@ -90,7 +90,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Lifestyle",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 6,
@@ -100,7 +100,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Startup",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 7,
@@ -110,7 +110,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Technology",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 8,
@@ -120,7 +120,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Lifestyle",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 9,
@@ -130,7 +130,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Startup",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 10,
@@ -140,7 +140,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Lifestyle",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 11,
@@ -150,7 +150,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Startup",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 12,
@@ -160,7 +160,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Technology",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 13,
@@ -170,7 +170,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Startup",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 14,
@@ -180,7 +180,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Lifestyle",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 15,
@@ -190,7 +190,7 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Technology",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
     {
         id: 16,
@@ -200,6 +200,6 @@ export const blog_data: BlogItemType[] = [{
         date: Date.now(),
         category: "Startup",
         author: "Alex Bennett",
-        author_img: profile_icon
+        authorImg: profile_icon
     },
 ]

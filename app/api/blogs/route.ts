@@ -6,10 +6,10 @@ import { writeFile } from "fs/promises";
 export async function GET(request) {
     try {
         await connect()
-        const blogs = await Blog.find()
+        const blogs = await Blog.find({})
         return new NextResponse(JSON.stringify(blogs), {status: 200});
     } catch (e) {
-        return new NextResponse('An Error occurred in GET!' + e, {status: 500});
+        return new NextResponse('An Error occurred in GET blogs!' + e, {status: 500});
     }
 
 }
@@ -39,6 +39,6 @@ export async function POST(request) {
         await Blog.create(blogData);
         return new NextResponse('Blog Added', {status: 200});
     } catch (e) {
-        return new NextResponse('An Error occurred in POST!' + e, {status: 500});
+        return new NextResponse('An Error occurred in POST a blog!' + e, {status: 500});
     }
 }

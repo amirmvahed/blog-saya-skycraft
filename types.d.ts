@@ -1,12 +1,12 @@
 export type BlogItemType = {
-    id: number,
-    title: string,
-    description: string,
-    image: string
-    date: number,
-    category: Category,
-    author: string,
-    author_img: string
+    id?: number,
+    title?: string,
+    description?: string,
+    image?: string
+    date?: number,
+    category?: Category,
+    author?: string,
+    authorImg?: string
 }
 
 
