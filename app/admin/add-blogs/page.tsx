@@ -42,7 +42,7 @@ export default function AddBlogs() {
         formData.append('author', data.author?.toString())
         formData.append('authorImg', data.authorImg?.toString())
         formData.append('image', image)
-        axios.post('/api/blogs', formData).then((response) => {
+        axios.post('/api/posts', formData).then((response) => {
             if (response.status === 200) {
                 toast.success(response.data)
                 setData({
