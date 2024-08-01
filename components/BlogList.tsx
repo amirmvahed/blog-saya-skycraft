@@ -1,6 +1,6 @@
 'use client';
-import {useEffect, useState} from "react";
-import axios from "axios";
+import {getAllBlogs} from "@/utils/getAllBlogs";
+import React, {useEffect, useState} from "react";
 import BlogItem from "@/components/BlogItem";
 import {BlogItemType, Category} from "@/types";
 
@@ -10,17 +10,11 @@ const BlogList: React.FC = () => {
     const [menu, setMenu] = useState<Category>("All");
     const [blogs, setBlogs] = useState<BlogItemType[]>([]);
 
-    const fetchBlogs = async () => {
-        try {
-            const response = await axios.get<BlogItemType[]>('/api/blogs');
-            setBlogs(response.data);
-        } catch (error) {
-            console.error("Error fetching blogs:", error);
-        }
-    };
-
     useEffect(() => {
-        fetchBlogs();
+        (async function fetchBlogs() {
+            const blogs = await getAllBlogs();
+            setBlogs(blogs)
+        })()
     }, []);
 
     return (
@@ -36,7 +30,7 @@ const BlogList: React.FC = () => {
                     </button>
                 ))}
             </div>
-            <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
+            <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24 min-h-[80vh]">
                 {blogs
                     .filter((item) => menu === 'All' || item.category === menu)
                     .map((item) => (

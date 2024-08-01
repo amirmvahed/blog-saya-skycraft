@@ -3,10 +3,10 @@ import Blog from "@/lib/models/Blog";
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 
-export async function GET(request) {
+export async function GET() {
     try {
         await connect()
-        const blogs = await Blog.find({})
+        const blogs = await Blog.find()
         return new NextResponse(JSON.stringify(blogs), {status: 200});
     } catch (e) {
         return new NextResponse('An Error occurred in GET blogs!' + e, {status: 500});
