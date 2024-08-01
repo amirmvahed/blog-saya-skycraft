@@ -1,19 +1,32 @@
 'use client';
-import {blog_data} from "@/assets/assets";
+import {useEffect, useState} from "react";
+import axios from "axios";
 import BlogItem from "@/components/BlogItem";
 import {BlogItemType, Category} from "@/types";
-import {useState} from "react";
-
 
 const categories: Category[] = ["All", "Technology", "Startup", "Lifestyle"];
 
-export default function BlogList() {
+const BlogList: React.FC = () => {
     const [menu, setMenu] = useState<Category>("All");
+    const [blogs, setBlogs] = useState<BlogItemType[]>([]);
+
+    const fetchBlogs = async () => {
+        try {
+            const response = await axios.get<BlogItemType[]>('/api/blogs');
+            setBlogs(response.data);
+        } catch (error) {
+            console.error("Error fetching blogs:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchBlogs();
+    }, []);
 
     return (
         <>
-            <div className='flex justify-center gap-6 my-10'>
-                {categories.map(category => (
+            <div className="flex justify-center gap-6 my-10">
+                {categories.map((category) => (
                     <button
                         key={category}
                         onClick={() => setMenu(category)}
@@ -23,18 +36,22 @@ export default function BlogList() {
                     </button>
                 ))}
             </div>
-            <div className='flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24'>
-                {blog_data.filter(item => menu === 'All' || item.category === menu).map((item: BlogItemType) => (
-                    <BlogItem
-                        key={item.id}
-                        id={item.id}
-                        title={item.title}
-                        category={item.category}
-                        description={item.description}
-                        image={item.image}
-                    />
-                ))}
+            <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
+                {blogs
+                    .filter((item) => menu === 'All' || item.category === menu)
+                    .map((item) => (
+                        <BlogItem
+                            key={item._id}
+                            id={item._id ?? 0}
+                            title={item.title ?? ''}
+                            category={item.category ?? ''}
+                            description={item.description ?? ''}
+                            image={item.image ?? ''}
+                        />
+                    ))}
             </div>
         </>
     );
-}
+};
+
+export default BlogList;
