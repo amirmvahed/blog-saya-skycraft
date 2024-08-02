@@ -26,7 +26,7 @@ async function BlogList() {
                         }
                     </tr>
                     </thead>
-                    <BlogTableItems data={data}/>
+                    {/*<BlogTableItems data={data}/>*/}
                 </table>
             </div>
         </div>
