@@ -1,12 +1,12 @@
 import {BlogTableItems} from "@/components/admin-components/BlogTableItems";
 import {BlogItemType} from "@/types";
-// import {getAllBlogs} from "@/utils/getAllBlogs";
+import {getAllBlogs} from "@/utils/getAllBlogs";
 
 const tableRows: string[] = ['Author name', 'Blog title', 'Blog date', 'Action']
 
 
 async function BlogList() {
-    // const data: BlogItemType[] = await getAllBlogs()
+    const data: BlogItemType[] = await getAllBlogs()
     return (
         <div className={'flex-1 pt-5 px-5 sm:pt-12 sm:pl-16'}>
             <h1>All Blogs</h1>
@@ -26,7 +26,7 @@ async function BlogList() {
                         }
                     </tr>
                     </thead>
-                    <BlogTableItems data={[]}/>
+                    <BlogTableItems data={data}/>
                 </table>
             </div>
         </div>
