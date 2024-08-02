@@ -2,7 +2,7 @@
 import BlogFrom from "@/components/admin-components/BlogFrom";
 import {BlogItemType} from "@/types";
 import createFormData from "@/utils/createFormData";
-import {notFound} from "next/navigation";
+import getBlogData from "@/utils/getBlogData";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
@@ -17,24 +17,15 @@ export default function EditBlog({params: {id}}) {
     });
 
 
-    async function getBlogData(id) {
-        const res = await fetch('http://localhost:3000/api/posts/' + id)
-        if (!res.ok) {
-            return notFound()
-        }
-        const data = await res.json()
-
-        setData(prevState => ({
-            ...prevState,
-            title: data.title,
-            description: data.description,
-            category: data.category,
-            image: data.image
-        }))
-    }
-
     useEffect(() => {
-        getBlogData(id)
+        (async function getData(id) {
+            const serverData = await getBlogData(id)
+            setData(prev => ({
+                ...prev,
+                ...serverData
+            }))
+        })(id)
+
     }, [])
 
 

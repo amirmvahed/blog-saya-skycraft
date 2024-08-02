@@ -1,15 +1,8 @@
 import Menu from "@/components/Menu";
 import Socials from "@/components/Socials";
+import getBlogData from "@/utils/getBlogData";
 import Image from "next/image";
-import {notFound} from "next/navigation";
 
-async function getBlogData(id) {
-    const res = await fetch('http://localhost:3000/api/posts/' + id, {cache: "no-cache"})
-    if (!res.ok) {
-        return notFound()
-    }
-    return res.json()
-}
 
 async function Blog({params}) {
     const data = await getBlogData(params.id)
