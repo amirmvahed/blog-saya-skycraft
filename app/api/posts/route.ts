@@ -16,7 +16,9 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
     try {
+        console.log('######### 50 #########')
         await connect()
+        console.log('######### 60 #########')
         const formData = await request.formData();
         const timestamp = Date.now();
 
@@ -48,6 +50,7 @@ export async function POST(request: NextRequest) {
         console.log('######### 400 #########')
         return NextResponse.json({message: 'Blog Added'}, {status: 200});
     } catch (e: any) {
+        console.log('######### 500 #########')
         return NextResponse.json({message: 'An Error occurred in POST a blog!', error: e.toString()}, {status: 500});
     }
 }
