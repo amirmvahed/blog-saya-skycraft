@@ -1,4 +1,4 @@
-import { BlogItemType } from "@/types";
+import {BlogItemType} from "@/types";
 
 const createFormData = (data: BlogItemType): FormData => {
     const formData = new FormData();
@@ -9,9 +9,7 @@ const createFormData = (data: BlogItemType): FormData => {
     formData.append('author', data.author ?? '');
     formData.append('authorImg', data.authorImg ?? '');
 
-    if (data.image instanceof Blob) {
-        formData.append('image', data.image);
-    } else if (typeof data.image === 'string') {
+    if (data.image instanceof Blob || typeof data.image === 'string') {
         formData.append('image', data.image);
     }
 
