@@ -23,7 +23,7 @@ export default function AddBlogs() {
         }
         const formData = createFormData(data)
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/api/posts', {
+            const response = await fetch('/api/posts', {
                 method: 'POST',
                 body: formData,
             });
