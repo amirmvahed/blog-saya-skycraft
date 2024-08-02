@@ -9,7 +9,6 @@ interface BlogFromPropsType {
     setData: Dispatch<SetStateAction<BlogItemType>>
     data: BlogItemType
     id?: number
-
 }
 
 export default function BlogFrom({formHandler, setData, data, id}: BlogFromPropsType) {

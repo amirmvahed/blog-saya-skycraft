@@ -1,16 +1,21 @@
-import {BlogItemType} from "@/types";
+import { BlogItemType } from "@/types";
 
-const createFormData = (data: BlogItemType)=> {
+const createFormData = (data: BlogItemType): FormData => {
     const formData = new FormData();
-    formData.append('title', data.title?.toString());
-    formData.append('description', data.description?.toString());
-    formData.append('category', data.category?.toString());
-    formData.append('author', data.author?.toString());
-    if (typeof data.image !== 'string' && data.image !== null) {
+
+    formData.append('title', data.title ?? '');
+    formData.append('description', data.description ?? '');
+    formData.append('category', data.category?.toString() ?? '');
+    formData.append('author', data.author ?? '');
+    formData.append('authorImg', data.authorImg ?? '');
+
+    if (data.image instanceof Blob) {
+        formData.append('image', data.image);
+    } else if (typeof data.image === 'string') {
         formData.append('image', data.image);
     }
-    formData.append('authorImg', data.authorImg?.toString());
-    return formData
+
+    return formData;
 }
 
-export default createFormData
+export default createFormData;

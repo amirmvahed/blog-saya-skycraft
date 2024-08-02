@@ -35,6 +35,10 @@ export default function EditBlog({params: {id}}: EditBlogPropsType) {
 
     const updateBlogPost = useCallback(async (e: FormEvent, id: number, data: BlogItemType) => {
         e.preventDefault()
+
+        if (!data.image) {
+            toast.warning('please fill img')
+        }
         const formData = createFormData(data)
 
         try {

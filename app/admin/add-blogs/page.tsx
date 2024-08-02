@@ -18,6 +18,9 @@ export default function AddBlogs() {
 
     const onSubmitHandler = useCallback(async (e: FormEvent, data: BlogItemType) => {
         e.preventDefault()
+        if (!data.image) {
+            toast.warning('please fill the thumbnail input')
+        }
         const formData = createFormData(data)
         try {
             const response = await fetch('/api/posts', {
