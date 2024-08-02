@@ -2,7 +2,7 @@ export type BlogItemType = {
     _id?: number,
     title?: string,
     description?: string,
-    image?: File | string | null
+    image?: File | string | null,
     date?: number,
     category?: Category,
     author?: string,
