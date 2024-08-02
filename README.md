@@ -65,6 +65,7 @@ This command will execute all unit tests defined in the __tests__ directory usin
     - You can see them in home page.
     - You can navigate to dashboard and see all blogs in blogs-list (use dashboard button on top right).
     - In each page you can navigate to the homepage by clicking on logo in header. 
+    - You can filter blogs based on category.
 
 2. **Watching a blog post details**:
     - You can see it by clicking on each blog post on homepage.

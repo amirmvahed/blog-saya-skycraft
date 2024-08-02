@@ -41,7 +41,7 @@ export default function AddBlogs() {
                     category: 'Startup',
                     image: '',
                 });
-                // window.location.href = '/admin/blogs-list'
+                window.location.href = '/admin/blogs-list'
             }
         } catch (error) {
             const err = error as Error;
