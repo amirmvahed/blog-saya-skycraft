@@ -30,9 +30,7 @@ export default function AddBlogs() {
                 method: 'POST',
                 body: formData,
             });
-            console.log('####### onSubmitHandler: 3')
             const serverData = await response.json();
-            console.log('####### onSubmitHandler: 4')
             if (response.status === 200) {
                 toast.success(serverData.message);
                 setData({
@@ -43,7 +41,7 @@ export default function AddBlogs() {
                     category: 'Startup',
                     image: '',
                 });
-                // window.location.href = '/admin/blogs-list'
+                window.location.href = '/admin/blogs-list'
             }
         } catch (error) {
             const err = error as Error;
