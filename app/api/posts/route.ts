@@ -16,13 +16,10 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
     try {
-        console.log('######### 50 #########')
         await connect()
-        console.log('######### 60 #########')
         const formData = await request.formData();
         const timestamp = Date.now();
 
-        console.log('######### 100 #########')
 
         const image = formData.get('image');
         let imgUrl = ''
@@ -32,9 +29,10 @@ export async function POST(request: NextRequest) {
             const path = `./public/${timestamp}_${image.name}`;
             await writeFile(path, buffer);
             imgUrl = `/${timestamp}_${image.name}`;
+        } else if (!image) {
+            throw new Error('Image is required');
         }
 
-        console.log('######### 200 #########')
         const blogData = {
             title: formData.get('title')?.toString() || '',
             description: formData.get('description')?.toString() || '',
