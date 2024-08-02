@@ -52,7 +52,9 @@ export default function BlogTableItem({title, author, id, date}: BlogTableItemsP
             <td className={'px-6 py-4'}>
                 <button onClick={() => deleteBlog(id)} className={'py-2 px-2 border rounded-lg'}>Delete</button>
                 <br/>
-                <button className={'mt-3 py-2 px-2 rounded-lg border'}>Edit</button>
+                <Link href={'/admin/add-blogs/' + id}>
+                    <button className={'mt-3 py-2 px-2 rounded-lg border'}>Edit</button>
+                </Link>
             </td>
         </tr>
 
