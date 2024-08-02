@@ -90,6 +90,7 @@ This command will execute all unit tests defined in the __tests__ directory usin
 
 - Author image and Author name are set by default, so you don't need to set anything.
 - This project is responsive.
+- You can write HTML in description. Use h1,h2,h3,p tag to have a better appearance.
 - In this project I tried to do as good as possible in this limited time, but there are definitely a lot of spaces to
   improve, so feel free to give any comment to make it better.
 
