@@ -29,7 +29,6 @@ export default function AddBlogs() {
             const response = await fetch('/api/posts', {
                 method: 'POST',
                 body: formData,
-                mode: 'no-cors'
             });
             const serverData = await response.json();
             if (response.status === 200) {

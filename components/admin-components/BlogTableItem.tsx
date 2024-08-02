@@ -18,7 +18,6 @@ export default function BlogTableItem({title, author, id, date}: BlogTableItemsP
     async function deleteBlog(id: number) {
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/posts/${id}`, {
             method: 'DELETE',
-            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             }
