@@ -1,49 +1,46 @@
 'use client';
-import {assets} from "@/assets/assets";
+import BlogFrom from "@/components/admin-components/BlogFrom";
 import {BlogItemType} from "@/types";
 import createFormData from "@/utils/createFormData";
-import NextImage from 'next/image';
-import {notFound, useRouter} from "next/navigation";
+import {notFound} from "next/navigation";
 import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
 export default function EditBlog({params: {id}}) {
-    const router = useRouter()
-    const [image, setImage] = useState<File | string | null>(null);
     const [data, setData] = useState<BlogItemType>({
         title: '',
         description: '',
         author: 'author',
         authorImg: 'authorImg',
         category: 'Startup',
+        image: ''
     });
-    useEffect(() => {
-        (async function getBlogData(id) {
-            const res = await fetch('http://localhost:3000/api/posts/' + id)
-            if (!res.ok) {
-                return notFound()
-            }
-            const data = await res.json()
 
-            setImage(data.image)
-            setData(prevState => ({
-                ...prevState,
-                title: data.title,
-                description: data.description,
-                category: data.category,
-            }))
-        })(id)
+
+    async function getBlogData(id) {
+        const res = await fetch('http://localhost:3000/api/posts/' + id)
+        if (!res.ok) {
+            return notFound()
+        }
+        const data = await res.json()
+
+        setData(prevState => ({
+            ...prevState,
+            title: data.title,
+            description: data.description,
+            category: data.category,
+            image: data.image
+        }))
+    }
+
+    useEffect(() => {
+        getBlogData(id)
     }, [])
 
 
-    const onChangeHandler = (event) => {
-        const {name, value} = event.target
-        setData(prevState => ({...prevState, [name]: value}))
-    }
-
     async function updateBlogPost(e, id) {
         e.preventDefault()
-        const formData = createFormData(data, image)
+        const formData = createFormData(data)
 
         try {
             const response = await fetch(`/api/posts/${id}`, {
@@ -52,6 +49,7 @@ export default function EditBlog({params: {id}}) {
             });
 
             if (!response.ok) {
+                toast.error(`Error: ${response.statusText}`)
                 throw new Error(`Error: ${response.statusText}`);
             }
 
@@ -66,63 +64,6 @@ export default function EditBlog({params: {id}}) {
 
 
     return (
-        <form onSubmit={(e) => updateBlogPost(e, id)} className={'pt-5 px-5 sm:pt-12 sm:pl-16'}>
-            <p className={'text-xl'}>Upload thumbnail</p>
-            <label htmlFor={'image'}>
-                {image ? (
-                    <NextImage
-                        className={"mt-4"}
-                        src={typeof image === 'string' ? image : URL.createObjectURL(image)}
-                        width={140}
-                        height={70}
-                        alt={'Upload Area'}
-                    />
-                ) : (
-                    <NextImage
-                        className={"mt-4"}
-                        src={assets.upload_area}
-                        width={140}
-                        height={70}
-                        alt={'Upload Area'}
-                    />
-                )}
-                <input
-                    onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                            setImage(file);
-                        }
-                    }}
-                    type="file"
-                    id={'image'}
-                    name={'image'}
-                    hidden
-                    required={typeof image !== 'string'}
-                />
-            </label>
-            <p className={'text-xl mt-4'}>
-                Blog title
-            </p>
-            <input name={'title'} onChange={onChangeHandler} value={data?.title}
-                   className={'w-full sm:w-[500px] mt-4 px-4 py-3 border'} type="text" placeholder={'Type here'}
-                   required/>
-            <p className={'text-xl mt-4'}>
-                Blog Description
-            </p>
-            <textarea name={'description'} onChange={onChangeHandler} value={data?.description}
-                      className={'w-full sm:w-[500px] mt-4 px-4 py-3 border'} placeholder={'Write content here'}
-                      rows={6} required/>
-            <p className={'text-xl mt-4'}>Blog Category</p>
-            <select name="category" onChange={onChangeHandler} value={data?.category}
-                    className={'w-40 mt-4 px-4 py-3 border text-gray-500'}>
-                <option value="Startup">Startup</option>
-                <option value="Technology">Technology</option>
-                <option value="Lifestyle">Lifestyle</option>
-            </select>
-            <br/>
-            <button type={'submit'} className={'mt-8 w-40 h-12 bg-black text-white'}>
-                {id ? 'EDIT' : 'ADD'}
-            </button>
-        </form>
+        <BlogFrom formHandler={(e) => updateBlogPost(e, id)} setData={setData} data={data} id={id}/>
     );
 }
