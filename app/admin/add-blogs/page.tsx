@@ -21,15 +21,17 @@ export default function AddBlogs() {
         if (!data.image) {
             toast.warning('please fill the thumbnail input')
         }
+        console.log('####### onSubmitHandler: 1')
         const formData = createFormData(data)
         try {
+            console.log('####### onSubmitHandler: 2')
             const response = await fetch('/api/posts', {
                 method: 'POST',
                 body: formData,
             });
-
+            console.log('####### onSubmitHandler: 3')
             const serverData = await response.json();
-
+            console.log('####### onSubmitHandler: 4')
             if (response.status === 200) {
                 toast.success(serverData.message);
                 setData({
