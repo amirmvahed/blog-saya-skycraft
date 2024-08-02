@@ -42,7 +42,7 @@ export default function EditBlog({params: {id}}: EditBlogPropsType) {
         const formData = createFormData(data)
 
         try {
-            const response = await fetch(`/api/posts/${id}`, {
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/posts/${id}`, {
                 method: 'PUT',
                 body: formData,
             });

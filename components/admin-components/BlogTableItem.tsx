@@ -16,7 +16,7 @@ export default function BlogTableItem({title, author, id, date}: BlogTableItemsP
     const router = useRouter();
 
     async function deleteBlog(id: number) {
-        const response = await fetch(`/api/posts/${id}`, {
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/posts/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
