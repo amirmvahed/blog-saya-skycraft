@@ -45,6 +45,7 @@ export default function EditBlog({params: {id}}: EditBlogPropsType) {
             const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/posts/${id}`, {
                 method: 'PUT',
                 body: formData,
+                mode: 'no-cors'
             });
 
             if (!response.ok) {
