@@ -24,7 +24,7 @@ export default function AddBlogs() {
         console.log('####### onSubmitHandler: 1')
         const formData = createFormData(data)
         try {
-            console.log('####### onSubmitHandler: 2')
+            console.log('####### onSubmitHandler: 2' + formData)
             const response = await fetch('/api/posts', {
                 method: 'POST',
                 body: formData,
