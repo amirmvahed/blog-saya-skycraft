@@ -1,13 +1,13 @@
 'use client';
 import {assets} from "@/assets/assets";
 import {BlogItemType} from "@/types";
+import createFormData from "@/utils/createFormData";
 import NextImage from 'next/image';
 import {useState} from "react";
 import {toast} from "react-toastify";
 
 export default function AddBlogs() {
-    const [image, setImage] = useState<File | null>(null);
-    const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
+    const [image, setImage] = useState<File | null | string>(null);
     const [data, setData] = useState<BlogItemType>({
         title: '',
         description: '',
@@ -17,30 +17,15 @@ export default function AddBlogs() {
         image: '',
     });
 
-    // Function to get dimensions of an image file
-    const getImageDimensions = (file: File, callback: (dimensions: { width: number; height: number }) => void) => {
-        const img = new Image();
-        img.onload = () => {
-            callback({width: img.width, height: img.height});
-        };
-        img.src = URL.createObjectURL(file);
-    };
 
     const onChangeHandler = (event) => {
         const {name, value} = event.target
         setData(prevState => ({...prevState, [name]: value}))
-        console.log(data)
     }
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        formData.append('title', data.title?.toString())
-        formData.append('description', data.description?.toString())
-        formData.append('category', data.category?.toString())
-        formData.append('author', data.author?.toString())
-        formData.append('authorImg', data.authorImg?.toString())
-        formData.append('image', image)
+        const formData = createFormData(data, image)
         try {
             const response = await fetch('/api/posts', {
                 method: 'POST',
@@ -73,7 +58,7 @@ export default function AddBlogs() {
         <form onSubmit={onSubmitHandler} className={'pt-5 px-5 sm:pt-12 sm:pl-16'}>
             <p className={'text-xl'}>Upload thumbnail</p>
             <label htmlFor={'image'}>
-                {image && imageDimensions ? (
+                {image ? (
                     <NextImage
                         className={"mt-4"}
                         src={URL.createObjectURL(image)}
@@ -95,9 +80,6 @@ export default function AddBlogs() {
                         const file = e.target.files?.[0];
                         if (file) {
                             setImage(file);
-                            getImageDimensions(file, (dimensions) => {
-                                setImageDimensions(dimensions);
-                            });
                         }
                     }}
                     type="file"
