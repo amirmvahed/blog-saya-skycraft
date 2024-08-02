@@ -1,5 +1,5 @@
 'use client';
-import {assets} from "@/assets/assets";
+import {assets} from "@/public/assets/assets";
 import {BlogItemType} from "@/types";
 import NextImage from 'next/image';
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";

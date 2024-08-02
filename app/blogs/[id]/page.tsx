@@ -1,4 +1,4 @@
-import {assets} from "@/assets/assets";
+import {assets} from "@/public/assets/assets";
 import Menu from "@/components/Menu";
 import Socials from "@/components/Socials";
 import getBlogData from "@/utils/getBlogData";

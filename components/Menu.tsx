@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {assets} from '@/assets/assets'
+import {assets} from '@/public/assets/assets'
 import Link from "next/link";
 import React from "react";
 

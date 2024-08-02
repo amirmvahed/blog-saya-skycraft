@@ -1,5 +1,5 @@
 'use client';
-import {assets} from "@/assets/assets";
+import {assets} from "@/public/assets/assets";
 import {getAllBlogs} from "@/utils/getAllBlogs";
 import React, {useEffect, useState} from "react";
 import BlogItem from "@/components/BlogItem";

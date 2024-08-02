@@ -1,6 +1,6 @@
 'use client'
 
-import {assets} from '@/assets/assets'
+import {assets} from '@/public/assets/assets'
 import Image, {StaticImageData} from "next/image";
 
 const socials: StaticImageData[] = [assets.facebook_icon, assets.twitter_icon, assets.googleplus_icon]
