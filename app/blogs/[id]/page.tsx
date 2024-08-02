@@ -4,7 +4,7 @@ import Image from "next/image";
 import {notFound} from "next/navigation";
 
 async function getBlogData(id) {
-    const res = await fetch('http://localhost:3000/api/posts/' + id)
+    const res = await fetch('http://localhost:3000/api/posts/' + id, {cache: "no-cache"})
     if (!res.ok) {
         return notFound()
     }
@@ -13,7 +13,6 @@ async function getBlogData(id) {
 
 async function Blog({params}) {
     const data = await getBlogData(params.id)
-
 
     return (data ? <>
                 <div className={'bg-gray-200 py-5 px-5 md:px-12 lg:px-28'}>

@@ -2,6 +2,7 @@ import connect from "@/lib/config/db";
 import Blog from "@/lib/models/Blog";
 import {NextResponse} from "next/server";
 import {writeFile} from "fs/promises";
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
     try {
@@ -36,6 +37,7 @@ export async function POST(request) {
         };
 
         await Blog.create(blogData);
+        await revalidatePath(`/`);
         return NextResponse.json({ message: 'Blog Added' }, { status: 200 });
     } catch (e) {
         return NextResponse.json({ message: 'An Error occurred in POST a blog!', error: e.toString() }, { status: 500 });

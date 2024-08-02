@@ -2,11 +2,13 @@
 import {assets} from "@/assets/assets";
 import {BlogItemType} from "@/types";
 import NextImage from 'next/image';
-import {useState} from "react";
+import {notFound, useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
-export default function AddBlogs() {
-    const [image, setImage] = useState<File | null>(null);
+export default function EditBlog({params: {id}}) {
+    const router = useRouter()
+    const [image, setImage] = useState<File | string | null>(null);
     const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
     const [data, setData] = useState<BlogItemType>({
         title: '',
@@ -14,8 +16,25 @@ export default function AddBlogs() {
         author: 'author',
         authorImg: 'authorImg',
         category: 'Startup',
-        image: '',
     });
+    useEffect(() => {
+        (async function getBlogData(id) {
+            const res = await fetch('http://localhost:3000/api/posts/' + id)
+            if (!res.ok) {
+                return notFound()
+            }
+            const data = await res.json()
+
+            setImage(data.image)
+            setData(prevState => ({
+                ...prevState,
+                title: data.title,
+                description: data.description,
+                category: data.category,
+            }))
+        })(id)
+    }, [])
+
 
     // Function to get dimensions of an image file
     const getImageDimensions = (file: File, callback: (dimensions: { width: number; height: number }) => void) => {
@@ -29,54 +48,48 @@ export default function AddBlogs() {
     const onChangeHandler = (event) => {
         const {name, value} = event.target
         setData(prevState => ({...prevState, [name]: value}))
-        console.log(data)
     }
 
-    const onSubmitHandler = async (e) => {
+    async function updateBlogPost(e, id) {
         e.preventDefault()
-        const formData = new FormData()
-        formData.append('title', data.title?.toString())
-        formData.append('description', data.description?.toString())
-        formData.append('category', data.category?.toString())
-        formData.append('author', data.author?.toString())
-        formData.append('authorImg', data.authorImg?.toString())
-        formData.append('image', image)
+        const formData = new FormData();
+        formData.append('title', data.title?.toString());
+        formData.append('description', data.description?.toString());
+        formData.append('category', data.category?.toString());
+        formData.append('author', data.author?.toString());
+        if (typeof image !== 'string' && image !== null) {
+            formData.append('image', image);
+        }
+        formData.append('authorImg', data.authorImg?.toString());
+
         try {
-            const response = await fetch('/api/posts', {
-                method: 'POST',
+            const response = await fetch(`/api/posts/${id}`, {
+                method: 'PUT',
                 body: formData,
             });
 
-            const data = await response.json();
-
-            if (response.status === 200) {
-                toast.success(data.message);
-                setData({
-                    title: '',
-                    description: '',
-                    author: 'author',
-                    authorImg: 'authorImg',
-                    category: 'Startup',
-                    image: '',
-                });
-                setImage(null)
-                window.location.href = '/admin/blogs-list'
-            } else {
-                toast.error("ERROR: " + data.message)
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
             }
-        } catch (e) {
-            toast.error("ERROR: " + e.message)
+
+            toast.success('Blog updated successfully')
+            window.location.href = '/admin/blogs-list'
+
+
+        } catch (error) {
+            toast.error('Failed to update blog' + error)
         }
     }
 
+
     return (
-        <form onSubmit={onSubmitHandler} className={'pt-5 px-5 sm:pt-12 sm:pl-16'}>
+        <form onSubmit={(e) => updateBlogPost(e, id)} className={'pt-5 px-5 sm:pt-12 sm:pl-16'}>
             <p className={'text-xl'}>Upload thumbnail</p>
             <label htmlFor={'image'}>
-                {image && imageDimensions ? (
+                {image ? (
                     <NextImage
                         className={"mt-4"}
-                        src={URL.createObjectURL(image)}
+                        src={typeof image === 'string' ? image : URL.createObjectURL(image)}
                         width={140}
                         height={70}
                         alt={'Upload Area'}
@@ -102,8 +115,9 @@ export default function AddBlogs() {
                     }}
                     type="file"
                     id={'image'}
+                    name={'image'}
                     hidden
-                    required
+                    required={typeof image !== 'string'}
                 />
             </label>
             <p className={'text-xl mt-4'}>
@@ -126,8 +140,8 @@ export default function AddBlogs() {
                 <option value="Lifestyle">Lifestyle</option>
             </select>
             <br/>
-            <button type={'submit'} className={'mt-8 w-40 h-12 bg-black text-white '}>
-                ADD
+            <button type={'submit'} className={'mt-8 w-40 h-12 bg-black text-white'}>
+                {id ? 'EDIT' : 'ADD'}
             </button>
         </form>
     );

@@ -1,6 +1,6 @@
-export const getAllBlogs = async (options = undefined) => {
+export const getAllBlogs = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/posts/', options)
+        const response = await fetch('http://localhost:3000/api/posts/',{cache: 'no-cache'})
 
         if (!response.ok) {
             const errorData = await response.json()
