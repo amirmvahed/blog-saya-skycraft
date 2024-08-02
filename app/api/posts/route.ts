@@ -20,6 +20,8 @@ export async function POST(request: NextRequest) {
         const formData = await request.formData();
         const timestamp = Date.now();
 
+        console.log('######### 100 #########')
+
         const image = formData.get('image');
         let imgUrl = ''
         if (image && typeof image !== "string") {
@@ -30,7 +32,7 @@ export async function POST(request: NextRequest) {
             imgUrl = `/${timestamp}_${image.name}`;
         }
 
-
+        console.log('######### 200 #########')
         const blogData = {
             title: formData.get('title')?.toString() || '',
             description: formData.get('description')?.toString() || '',
@@ -40,8 +42,10 @@ export async function POST(request: NextRequest) {
             authorImg: formData.get('authorImg')?.toString() || ''
         };
 
+        console.log('######### 300 #########')
         await Blog.create(blogData);
         await revalidatePath(`/`);
+        console.log('######### 400 #########')
         return NextResponse.json({message: 'Blog Added'}, {status: 200});
     } catch (e: any) {
         return NextResponse.json({message: 'An Error occurred in POST a blog!', error: e.toString()}, {status: 500});
