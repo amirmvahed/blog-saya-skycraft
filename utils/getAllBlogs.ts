@@ -1,6 +1,6 @@
 export const getAllBlogs = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/posts/',{cache: 'no-cache'})
+        const response = await fetch(process.env.API_URL + '/api/posts/', {cache: 'no-cache'})
 
         if (!response.ok) {
             const errorData = await response.json()
