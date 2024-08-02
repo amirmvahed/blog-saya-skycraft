@@ -24,7 +24,10 @@ export default function AddBlogs() {
         console.log('####### onSubmitHandler: 1')
         const formData = createFormData(data)
         try {
-            console.log('####### onSubmitHandler: 2' + formData)
+            console.log('####### onSubmitHandler: 2')
+            for (const formDatum of formData) {
+                console.log(formDatum)
+            }
             const response = await fetch('/api/posts', {
                 method: 'POST',
                 body: formData,
@@ -42,7 +45,7 @@ export default function AddBlogs() {
                     category: 'Startup',
                     image: '',
                 });
-                window.location.href = '/admin/blogs-list'
+                // window.location.href = '/admin/blogs-list'
             }
         } catch (error) {
             const err = error as Error;
