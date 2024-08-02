@@ -1,18 +1,18 @@
 import {assets} from "@/assets/assets";
 import Image from 'next/image'
 import Link from "next/link";
+import {useRouter} from 'next/navigation';
 import {toast} from "react-toastify";
-import { useRouter } from 'next/navigation';
 
 type BlogTableItemsProps = {
     title: string,
     author: string,
     id: number,
-    date: string
+    date: number
 };
 
 export default function BlogTableItem({title, author, id, date}: BlogTableItemsProps) {
-    const blogDate = new Date(date)
+    const blogDate = new Date(String(date))
     const router = useRouter();
 
     async function deleteBlog(id: number) {

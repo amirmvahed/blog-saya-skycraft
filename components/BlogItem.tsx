@@ -1,12 +1,12 @@
 import {assets} from '@/assets/assets'
-import Image from "next/image";
+import Image, {StaticImageData} from "next/image";
 import Link from "next/link";
 
 interface blogItemView {
     id: number,
     title: string,
     description: string,
-    image: string,
+    image: string | StaticImageData,
     category: string,
 }
 

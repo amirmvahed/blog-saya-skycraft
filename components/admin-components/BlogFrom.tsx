@@ -1,12 +1,22 @@
 'use client';
 import {assets} from "@/assets/assets";
+import {BlogItemType} from "@/types";
 import NextImage from 'next/image';
+import {ChangeEvent, Dispatch, FormEvent, SetStateAction} from "react";
 
-export default function BlogFrom({formHandler, setData, data, id = undefined}) {
-    const onChangeHandler = (event) => {
-        const {name, value} = event.target
-        setData(prevState => ({...prevState, [name]: value}))
-    }
+interface BlogFromPropsType {
+    formHandler: (e: FormEvent) => Promise<void>
+    setData: Dispatch<SetStateAction<BlogItemType>>
+    data: BlogItemType
+    id?: number
+
+}
+
+export default function BlogFrom({formHandler, setData, data, id}: BlogFromPropsType) {
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const {name, value} = event.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+        setData(prevState => ({...prevState, [name]: value}));
+    };
 
 
     return (

@@ -2,7 +2,7 @@
 import BlogFrom from "@/components/admin-components/BlogFrom";
 import {BlogItemType} from "@/types";
 import createFormData from "@/utils/createFormData";
-import {useCallback, useState} from "react";
+import {FormEvent, useCallback, useState} from "react";
 import {toast} from "react-toastify";
 
 export default function AddBlogs() {
@@ -16,7 +16,7 @@ export default function AddBlogs() {
     });
 
 
-    const onSubmitHandler = useCallback(async (e, data) => {
+    const onSubmitHandler = useCallback(async (e: FormEvent, data: BlogItemType) => {
         e.preventDefault()
         const formData = createFormData(data)
         try {
@@ -40,8 +40,9 @@ export default function AddBlogs() {
                 window.location.href = '/admin/blogs-list'
             }
 
-        } catch (e) {
-            toast.error("ERROR: " + e.message)
+        } catch (error) {
+            const err = error as Error;
+            toast.error("Failed to update blog: " + err.message);
         }
     }, [])
 

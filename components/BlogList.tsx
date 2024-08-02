@@ -1,4 +1,5 @@
 'use client';
+import {assets} from "@/assets/assets";
 import {getAllBlogs} from "@/utils/getAllBlogs";
 import React, {useEffect, useState} from "react";
 import BlogItem from "@/components/BlogItem";
@@ -40,7 +41,7 @@ const BlogList: React.FC = () => {
                             title={item.title ?? ''}
                             category={item.category ?? ''}
                             description={item.description ?? ''}
-                            image={item.image ?? ''}
+                            image={typeof item?.image !== 'object' ? item.image || assets.blog_pic_1 : assets.blog_pic_1}
                         />
                     ))}
             </div>

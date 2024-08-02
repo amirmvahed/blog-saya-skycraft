@@ -11,7 +11,8 @@ export const BlogTableItems: React.FC<BlogTableItemsProps> = ({data}) => {
     return (
         <tbody>
         {data.map(({_id, title, author, date}) =>
-            <BlogTableItem key={_id} id={_id} title={title} author={author} date={date}/>)}
+            <BlogTableItem key={_id} id={_id ? _id : 0} title={title ? title : ''} author={author ? author : ''}
+                           date={date ? date : 0}/>)}
         </tbody>
     );
 };

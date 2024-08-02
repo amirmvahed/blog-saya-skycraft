@@ -3,10 +3,14 @@ import BlogFrom from "@/components/admin-components/BlogFrom";
 import {BlogItemType} from "@/types";
 import createFormData from "@/utils/createFormData";
 import getBlogData from "@/utils/getBlogData";
-import {useCallback, useEffect, useState} from "react";
+import {FormEvent, useCallback, useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
-export default function EditBlog({params: {id}}) {
+interface EditBlogPropsType {
+    params: { id: number }
+}
+
+export default function EditBlog({params: {id}}: EditBlogPropsType) {
     const [data, setData] = useState<BlogItemType>({
         title: '',
         description: '',
@@ -18,18 +22,18 @@ export default function EditBlog({params: {id}}) {
 
 
     useEffect(() => {
-        (async function getData(id) {
-            const serverData = await getBlogData(id)
+        (async function getData(blogId: number) {
+            const serverData = await getBlogData(blogId)
             setData(prev => ({
                 ...prev,
                 ...serverData
             }))
         })(id)
 
-    }, [])
+    }, [id])
 
 
-    const updateBlogPost = useCallback(async (e, id, data) => {
+    const updateBlogPost = useCallback(async (e: FormEvent, id: number, data: BlogItemType) => {
         e.preventDefault()
         const formData = createFormData(data)
 
@@ -51,11 +55,10 @@ export default function EditBlog({params: {id}}) {
         } catch (error) {
             toast.error('Failed to update blog' + error)
         }
-    },[])
-
+    }, [])
 
 
     return (
-        <BlogFrom formHandler={(e) => updateBlogPost(e, id, data)} setData={setData} data={data} id={id}/>
+        <BlogFrom formHandler={(e: FormEvent) => updateBlogPost(e, id, data)} setData={setData} data={data} id={id}/>
     );
 }

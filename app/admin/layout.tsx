@@ -2,7 +2,8 @@ import {assets} from "@/assets/assets";
 import Sidebar from "@/components/admin-components/Sidebar";
 import Image from "next/image";
 import Link from "next/link";
-import { ToastContainer } from 'react-toastify';
+import {ReactNode} from "react";
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const links: { link: string, title: string }[] = [
@@ -16,7 +17,11 @@ const links: { link: string, title: string }[] = [
     }
 ]
 
-export default function Layout({children}) {
+interface LayoutPropsType {
+    children: ReactNode;
+}
+
+export default function Layout({children}: LayoutPropsType) {
     return (
         <div className={'flex'}>
             <ToastContainer theme={'dark'}/>
@@ -29,7 +34,7 @@ export default function Layout({children}) {
                     </h3>
                     <div className={'flex justify-end sm:hidden'}>
                         {
-                            links.map(i => <Link className={'p-2 m-1 border rounded-lg'} href={i.link}>{i.title}</Link>)
+                            links.map(i => <Link key={i.title} className={'p-2 m-1 border rounded-lg'} href={i.link}>{i.title}</Link>)
                         }
                     </div>
                     <Image src={assets.profile_icon} width={40} alt={'Profile picture'}/>
