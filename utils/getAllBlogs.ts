@@ -4,12 +4,11 @@ export const getAllBlogs = async () => {
 
         if (!response.ok) {
             const errorData = await response.json()
-            throw new Error(errorData.message)
+            console.error(errorData.message)
         }
 
         return response.json()
     } catch (error) {
         console.error("Error fetching blogs:", error)
-        throw error
     }
 };
