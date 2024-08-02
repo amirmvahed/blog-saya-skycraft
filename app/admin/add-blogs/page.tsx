@@ -29,8 +29,9 @@ export default function AddBlogs() {
             });
 
             const serverData = await response.json();
-
+            console.log('###### 100 ######')
             if (response.status === 200) {
+                console.log('###### 200 ######')
                 toast.success(serverData.message);
                 setData({
                     title: '',
@@ -42,10 +43,11 @@ export default function AddBlogs() {
                 });
                 window.location.href = '/admin/blogs-list'
             }
-
+            console.log('###### 300 ######')
         } catch (error) {
             const err = error as Error;
-            toast.error("Failed to update blog: " + err.message);
+            toast.error("Failed to create a blog: " + err.message);
+            console.error("Failed to create a blog: " + err.message);
         }
     }, [])
 
