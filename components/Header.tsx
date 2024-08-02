@@ -1,6 +1,4 @@
 import Menu from "@/components/Menu";
-import Image from "next/image";
-import {assets} from '@/assets/assets'
 import React from 'react'
 
 

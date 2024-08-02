@@ -37,7 +37,7 @@ export default function BlogTableItem({title, author, id, date}: BlogTableItemsP
     return (
         <tr className={'bg-white border-b'}>
             <th scope={'row'}
-                className={'items-center content-center gap-3 hidden sm:flex px-6 py-10 font-medium text-gray-900'}>
+                className={'items-center content-center gap-3 flex px-6 py-10 font-medium text-gray-900'}>
                 <Image alt="Author image" width={40} height={40} src={assets.profile_icon}/>
                 <p>{author}</p>
             </th>

@@ -12,7 +12,7 @@ interface SocialsProps {
 export default function Socials({width = 40}: SocialsProps) {
     return (
         <div className={'flex'}>
-            {socials.map((socialLogo: string, index) => <Image key={index} width={width} src={socialLogo}/>)}
+            {socials.map((socialLogo: string, index) => <Image key={index} width={width} alt={'social logo'} src={socialLogo}/>)}
         </div>
     );
 }

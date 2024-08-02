@@ -2,7 +2,7 @@
 import BlogFrom from "@/components/admin-components/BlogFrom";
 import {BlogItemType} from "@/types";
 import createFormData from "@/utils/createFormData";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {toast} from "react-toastify";
 
 export default function AddBlogs() {
@@ -16,7 +16,7 @@ export default function AddBlogs() {
     });
 
 
-    const onSubmitHandler = async (e) => {
+    const onSubmitHandler = useCallback(async (e, data) => {
         e.preventDefault()
         const formData = createFormData(data)
         try {
@@ -25,10 +25,10 @@ export default function AddBlogs() {
                 body: formData,
             });
 
-            const data = await response.json();
+            const serverData = await response.json();
 
             if (response.status === 200) {
-                toast.success(data.message);
+                toast.success(serverData.message);
                 setData({
                     title: '',
                     description: '',
@@ -43,9 +43,9 @@ export default function AddBlogs() {
         } catch (e) {
             toast.error("ERROR: " + e.message)
         }
-    }
+    }, [])
 
     return (
-        <BlogFrom formHandler={onSubmitHandler} setData={setData} data={data}/>
+        <BlogFrom formHandler={(e) => onSubmitHandler(e, data)} setData={setData} data={data}/>
     );
 }

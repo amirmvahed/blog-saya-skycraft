@@ -2,6 +2,8 @@ import {BlogTableItems} from "@/components/admin-components/BlogTableItems";
 import {BlogItemType} from "@/types";
 import {getAllBlogs} from "@/utils/getAllBlogs";
 
+const tableRows: string[] = ['Author name', 'Blog title', 'Blog date', 'Action']
+
 
 async function BlogList() {
     const data: BlogItemType[] = await getAllBlogs()
@@ -13,18 +15,15 @@ async function BlogList() {
                 <table className={'w-full text-sm text-gray-500'}>
                     <thead className={'text-sm text-gray-700 text-left uppercase bg-gray-50'}>
                     <tr>
-                        <th scope={'col'} className={'hidden sm:block px-6 py-3'}>
-                            Author name
-                        </th>
-                        <th scope={'col'} className={'px-6 py-3'}>
-                            Blog title
-                        </th>
-                        <th scope={'col'} className={'px-6 py-3'}>
-                            Blog date
-                        </th>
-                        <th scope={'col'} className={'px-6 py-3'}>
-                            Action
-                        </th>
+                        {
+                            tableRows.map(item => {
+                                return (
+                                    <th scope={'col'} className={'px-6 py-3'}>
+                                        {item}
+                                    </th>
+                                )
+                            })
+                        }
                     </tr>
                     </thead>
                     <BlogTableItems data={data}/>

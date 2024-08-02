@@ -3,7 +3,7 @@ import BlogFrom from "@/components/admin-components/BlogFrom";
 import {BlogItemType} from "@/types";
 import createFormData from "@/utils/createFormData";
 import getBlogData from "@/utils/getBlogData";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {toast} from "react-toastify";
 
 export default function EditBlog({params: {id}}) {
@@ -29,7 +29,7 @@ export default function EditBlog({params: {id}}) {
     }, [])
 
 
-    async function updateBlogPost(e, id) {
+    const updateBlogPost = useCallback(async (e, id, data) => {
         e.preventDefault()
         const formData = createFormData(data)
 
@@ -51,10 +51,11 @@ export default function EditBlog({params: {id}}) {
         } catch (error) {
             toast.error('Failed to update blog' + error)
         }
-    }
+    },[])
+
 
 
     return (
-        <BlogFrom formHandler={(e) => updateBlogPost(e, id)} setData={setData} data={data} id={id}/>
+        <BlogFrom formHandler={(e) => updateBlogPost(e, id, data)} setData={setData} data={data} id={id}/>
     );
 }
