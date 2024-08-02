@@ -29,8 +29,6 @@ export async function POST(request: NextRequest) {
             const path = `./public/${timestamp}_${image.name}`;
             await writeFile(path, buffer);
             imgUrl = `/${timestamp}_${image.name}`;
-        } else if (!image) {
-            throw new Error('Image is required');
         }
 
         const blogData = {
@@ -42,13 +40,10 @@ export async function POST(request: NextRequest) {
             authorImg: formData.get('authorImg')?.toString() || ''
         };
 
-        console.log('######### 300 #########')
         await Blog.create(blogData);
         await revalidatePath(`/`);
-        console.log('######### 400 #########')
         return NextResponse.json({message: 'Blog Added'}, {status: 200});
     } catch (e: any) {
-        console.log('######### 500 #########')
         return NextResponse.json({message: 'An Error occurred in POST a blog!', error: e.toString()}, {status: 500});
     }
 }

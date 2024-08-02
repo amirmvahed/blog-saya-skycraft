@@ -21,10 +21,8 @@ export default function AddBlogs() {
         if (!data.image) {
             toast.warning('please fill the thumbnail input')
         }
-        console.log('####### onSubmitHandler: 1')
         const formData = createFormData(data)
         try {
-            console.log('####### onSubmitHandler: 2')
             for (const formDatum of formData) {
                 console.log(formDatum)
             }
