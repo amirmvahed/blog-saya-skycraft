@@ -32,9 +32,7 @@ const BlogList: React.FC = () => {
                 ))}
             </div>
             <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24 min-h-[80vh]">
-                {blogs
-                    .filter((item) => menu === 'All' || item.category === menu)
-                    .map((item) => (
+                {blogs?.filter((item) => menu === 'All' || item.category === menu)?.map((item) => (
                         <BlogItem
                             key={item._id}
                             id={item._id ?? 0}
